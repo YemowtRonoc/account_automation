@@ -3,7 +3,6 @@ Module to get admin credentials for ssh automation
 """
 import getpass
 import subprocess
-import os
 
 from custom_input.custom_input import input_ip_address
 from custom_input.custom_input import input_string
