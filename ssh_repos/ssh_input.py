@@ -25,7 +25,8 @@ def input_admin_ssh_credentials(ssh_credentials):
                 "What is the admin username on the repo server? (%s)" % \
                                              ssh_credentials['ip_address'])
 
-    if ssh_credentials['password'] is None:
+    if ssh_credentials['password'] is None and \
+                (ssh_credentials['name'] != 'root' or ssh_credentials['key'] == False):
         while ssh_credentials['password'] is None:
             print "What is the admin password for the repo server?"
             user_input = getpass.getpass()

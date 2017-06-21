@@ -10,8 +10,16 @@ for word in $USER_NAME; do
     INITIALS="$INITIALS${word:0:1}"
 done
 
-if [ "$BOOL_DEV" == "True" ]; then
-    ./ssh_repos/new_user_dev.exp "$REPO_SERVER" "$ADMIN_USERNAME" "$ADMIN_PASSWORD" "$INITIALS"
+if [ "$ADMIN_USERNAME" == "root" ]; then 
+    if [ "$BOOL_DEV" == "True" ]; then
+        ./ssh_repos/root_new_user_dev.exp "$REPO_SERVER" "$ADMIN_USERNAME" "$ADMIN_PASSWORD" "$INITIALS"
+    else
+        ./ssh_repos/root_new_user.exp "$REPO_SERVER" "$ADMIN_USERNAME" "$ADMIN_PASSWORD" "$INITIALS"
+    fi
 else
-    ./ssh_repos/new_user.exp "$REPO_SERVER" "$ADMIN_USERNAME" "$ADMIN_PASSWORD" "$INITIALS"
+    if [ "$BOOL_DEV" == "True" ]; then
+        ./ssh_repos/new_user_dev.exp "$REPO_SERVER" "$ADMIN_USERNAME" "$ADMIN_PASSWORD" "$INITIALS"
+    else
+        ./ssh_repos/new_user.exp "$REPO_SERVER" "$ADMIN_USERNAME" "$ADMIN_PASSWORD" "$INITIALS"
+    fi
 fi
