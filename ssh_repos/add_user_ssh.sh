@@ -11,7 +11,7 @@ for word in $USER_NAME; do
 done
 
 if [ "$BOOL_DEV" == "True" ]; then
-    ./ssh_repos/new_user_dev.sh "$REPO_SERVER" "$ADMIN_USERNAME" "$ADMIN_PASSWORD" "$INITIALS"
+    ./ssh_repos/new_user_dev.exp "$REPO_SERVER" "$ADMIN_USERNAME" "$ADMIN_PASSWORD" "$INITIALS"
 else
-    ./ssh_repos/new_user.sh "$REPO_SERVER" "$ADMIN_USERNAME" "$ADMIN_PASSWORD" "$INITIALS"
+    ./ssh_repos/new_user.exp "$REPO_SERVER" "$ADMIN_USERNAME" "$ADMIN_PASSWORD" "$INITIALS"
 fi
