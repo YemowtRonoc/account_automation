@@ -25,7 +25,7 @@ def input_user_details(user_details):
         while user_details['dev'] is None:
             print "Is the new user a developer? (yes/no)"
             user_input = raw_input()
-            if len(user_input) > 0:
+            if user_input:      #Python sequences evaluate to False when empty
                 user_input = user_input.lower()
                 if user_input == 'y' or user_input == 'yes':
                     user_details['dev'] = True
@@ -39,7 +39,6 @@ def input_user_details(user_details):
 
 
 def main():
-    print "boo"
     user_details = {'name':None, 'login':None, 'password':None, 'dev':None}
     bugzilla_credentials = {'Bugzilla_login':None, 'Bugzilla_password':None}
     ssh_credentials = {'name':None, 'password':None, 'ip_address':None}
@@ -50,10 +49,14 @@ def main():
     parser.add_argument("-n", "--name", help="Name of the new hire")
     parser.add_argument("-e", "--email", help="Email of the new hire")
     # parser.add_argument("-p", "--position", help="Position of the new hire")
-    parser.add_argument("-d", "--dev", action="store_true", help="If the new user is a developer, add this.")
-    parser.add_argument("-a", "--adminemail", help="Email address for the automator")
-    parser.add_argument("-r", "--reposerver", help="Repo Server domain (e.g. ssh fs@<--reposerver>)")
-    parser.add_argument("-u", "--adminusername", help="Admin username on repo server")
+    parser.add_argument("-d", "--dev", action="store_true", \
+                            help="If the new user is a developer, add this.")
+    parser.add_argument("-a", "--adminemail", \
+                                        help="Email address for the automator")
+    parser.add_argument("-r", "--reposerver", \
+                        help="Repo Server domain (e.g. ssh fs@<--reposerver>)")
+    parser.add_argument("-u", "--adminusername", \
+                                        help="Admin username on repo server")
 
     args = parser.parse_args()
 
@@ -62,7 +65,7 @@ def main():
     if args.email:
         user_details['login'] = args.email
     # if args.position:
-    #     user_details['position'] = True
+    #     user_details['position'] = args.position
     if args.dev:
         user_details['dev'] = True
     if args.adminemail:
