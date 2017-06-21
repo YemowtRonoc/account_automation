@@ -53,7 +53,7 @@ def main():
                         help="Repo Server domain (e.g. ssh fs@<--reposerver>)")
     parser.add_argument("-u", "--adminusername", \
                                         help="Admin username on repo server")
-    parser.add_argument("-s" "--sshpassword", \
+    parser.add_argument("-s", "--sshpassword", action="store_true", \
                             help="Use password with SSH as keys are not set up")
 
     args = parser.parse_args()
