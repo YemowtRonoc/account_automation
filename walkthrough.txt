@@ -1,0 +1,49 @@
+Prerequisites:    
+    
+    SSH Keys:
+    To use this program, you need to set up SSH keys with the repo server.
+    To do this, go to a terminal, and enter: ssh-keygen
+    This will generate an authentication key for your ssh instance.
+    From there, copy the key to the repo server.
+    "ssh-copy-id fs@127.0.0.1", with fs as a placeholder for the repo username, 
+    and 127.0.0.1 as a placeholder for the repo server IP.
+    
+    Resetting Constants:
+    In the constants.py file at the root directory of the project, there are
+    some constants that you may want to update. Mainly the BUGZILLA_URL and 
+    DEFAULT_PASSWORD. This is if you want to change either the url to get to 
+    bugzilla, or the default password given to the new hires accounts.
+    
+    Setup Scripts:
+    The setup scripts will do most of the setup required before running the
+    automation. This installs most the dependencies and updates what is needed.
+    Each step is: 
+    - installs expect
+    - updates firefox
+    - install pip
+    - selenium for python
+    - geckodriver for selenium interaction with firefox
+    - gmail python api client.
+    
+    Gmail Authentication:
+    To setup gmail authentication, follow the steps in the following link
+    (Note: The quickstart file can be found in the email_notification subfolder. Ensure it's 
+    run while your working directory is the root of the account_automation project.) 
+    https://developers.google.com/gmail/api/quickstart/python 
+    The client_secret.json should be placed in the root of the project.
+
+
+Running the account_automation:
+
+    To run account_automation, simply go to the parent directory and enter 
+    "python account_automation" in the terminal. This should give you a list of prompts for
+    the necessary details to automate the account creation. 
+    The details requested are: 
+    - the name of the new hire (-n, --name)
+    - the email of the new hire (-e, --email)
+    - whether or not the new hire is a developer (-d, --dev)
+    - the bugzilla login of the admin   (-a --adminemail)
+    - the bugzilla password of the admin
+    - the IP address of the repo server (127.0.0.1) (-r, --reposerver)
+    - the admin username on the repo server (root) (-u, --adminusername)
+    - the password for the admin of the repo server
