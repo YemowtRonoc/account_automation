@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #MAN is the package manager
 MAN=$1
 
