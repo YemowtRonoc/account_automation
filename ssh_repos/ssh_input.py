@@ -6,6 +6,7 @@ import subprocess
 import os
 
 from custom_input.custom_input import input_ip_address
+from custom_input.custom_input import input_string
 import constants
 
 def input_admin_ssh_credentials(ssh_credentials):
@@ -17,14 +18,9 @@ def input_admin_ssh_credentials(ssh_credentials):
                             "What is the IP address of the repo server?")
 
     if ssh_credentials['name'] is None:
-        while ssh_credentials['name'] is None:
-            print "What is the admin username on the repo server? (%s)" % \
-                                            (ssh_credentials['ip_address'], )
-            user_input = raw_input()
-            if len(user_input) <= 0:
-                print "Please enter a valid username"
-            else:
-                ssh_credentials['name'] = user_input
+        ssh_credentials['name'] = input_string( \
+                "What is the admin username on the repo server? (%s)" % \
+                                             ssh_credentials['ip_address'])
 
     if ssh_credentials['password'] is None:
         while ssh_credentials['password'] is None:
