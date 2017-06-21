@@ -39,6 +39,9 @@ def input_user_details(user_details):
 
 
 def main():
+    """
+    Main function, entry point for account automation program.
+    """
     user_details = {'name':None, 'login':None, 'password':None, 'dev':None}
     bugzilla_credentials = {'Bugzilla_login':None, 'Bugzilla_password':None}
     ssh_credentials = {'name':None, 'password':None, 'ip_address':None}
