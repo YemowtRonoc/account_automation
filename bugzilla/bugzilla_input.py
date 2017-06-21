@@ -31,5 +31,6 @@ def begin_automation(user_credentials, admin_credentials):
     """
     status = False
     while status is False:
+        admin_credentials = input_admin_bugzilla_credentials(admin_credentials)
         status = bugzilla_automation.create_user_in_bugzilla( \
                         constants.BUGZILLA_URL, user_credentials, admin_credentials)
