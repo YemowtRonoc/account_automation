@@ -25,7 +25,7 @@ def input_user_details(user_details):
         while user_details['dev'] is None:
             print "Is the new user a developer? (yes/no)"
             user_input = raw_input()
-            if user_input:      #Python sequences evaluate to False when empty
+            if len(user_input) > 0:
                 user_input = user_input.lower()
                 if user_input == 'y' or user_input == 'yes':
                     user_details['dev'] = True
@@ -102,8 +102,10 @@ def main():
 ========================
     """
 
-    bugzilla_automation.create_user_in_bugzilla(constants.BUGZILLA_URL, \
-                                        user_details, bugzilla_credentials)
+    user_created = bugzilla_automation.create_user_in_bugzilla(\
+                constants.BUGZILLA_URL, user_details, bugzilla_credentials)
+    if user_created == False:
+        print "Failed to create bugzilla account, please try again"
     ssh_input.shell_script(ssh_credentials, user_details)
     create_email(user_details['login'], bugzilla_credentials['Bugzilla_login'], \
                             user_details['name'])
