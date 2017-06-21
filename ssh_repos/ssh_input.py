@@ -26,7 +26,7 @@ def input_admin_ssh_credentials(ssh_credentials):
                                              ssh_credentials['ip_address'])
 
     if ssh_credentials['password'] is None and \
-                (ssh_credentials['name'] != 'root' or ssh_credentials['key'] == False):
+            (ssh_credentials['name'] != 'root' or ssh_credentials['key'] == False):
         while ssh_credentials['password'] is None:
             print "What is the admin password for the repo server?"
             user_input = getpass.getpass()
@@ -55,8 +55,3 @@ def begin_automation(user_credentials):
     ssh_credentials = {}
     ssh_credentials = input_admin_ssh_credentials(ssh_credentials)
     shell_script(ssh_credentials, user_credentials)
-
-if __name__ == "__main__":
-    SSH_CREDENTIALS = {}
-    SSH_CREDENTIALS = input_admin_ssh_credentials(SSH_CREDENTIALS)
-    shell_script(SSH_CREDENTIALS, USER_CREDENTIALS)
