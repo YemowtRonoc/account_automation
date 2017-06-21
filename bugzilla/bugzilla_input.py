@@ -15,7 +15,7 @@ def input_admin_bugzilla_credentials(admin_credentials):
 
     if admin_credentials['Bugzilla_password'] is None:
         while admin_credentials['Bugzilla_password'] is None:
-            print "What is the admin password?"
+            print "What is the admin password for bugzilla?"
             user_input = getpass.getpass()
             if len(user_input) <= 0:
                 print "Please enter a valid password."
