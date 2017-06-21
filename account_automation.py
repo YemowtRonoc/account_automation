@@ -37,7 +37,7 @@ def main():
     """
     user_details = {'name':None, 'login':None, 'password':None, 'dev':None}
     bugzilla_credentials = {'Bugzilla_login':None, 'Bugzilla_password':None}
-    ssh_credentials = {'name':None, 'password':None, 'ip_address':None}
+    ssh_credentials = {'name':None, 'password':None, 'ip_address':None, 'key':True}
 
     parser = argparse.ArgumentParser(description=\
                 "This automates creation of bugzilla and repo(git) accounts")
@@ -53,6 +53,8 @@ def main():
                         help="Repo Server domain (e.g. ssh fs@<--reposerver>)")
     parser.add_argument("-u", "--adminusername", \
                                         help="Admin username on repo server")
+    parser.add_argument("-s" "--sshpassword", \
+                            help="Use password with SSH as keys are not set up")
 
     args = parser.parse_args()
 
@@ -70,6 +72,8 @@ def main():
         ssh_credentials['ip_address'] = args.reposerver
     if args.adminusername:
         ssh_credentials['name'] = args.adminusername
+    if args.sshpassword:
+        ssh_credentials['key'] = False
 
     print "Please ensure you have ssh keys set up with the repo server."
 
