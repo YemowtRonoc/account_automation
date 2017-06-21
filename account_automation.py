@@ -9,6 +9,7 @@ import constants
 import ssh_repos.ssh_input as ssh_input
 from custom_input.custom_input import input_email
 from custom_input.custom_input import input_string
+from custom_input.custom_input import input_y_or_n
 from email_notification.create_email import create_email
 
 def input_user_details(user_details):
@@ -22,15 +23,7 @@ def input_user_details(user_details):
         user_details['login'] = input_email("What is the new user's email address?")
 
     if user_details['dev'] is None:
-        while user_details['dev'] is None:
-            print "Is the new user a developer? (yes/no)"
-            user_input = raw_input()
-            if len(user_input) > 0:
-                user_input = user_input.lower()
-                if user_input == 'y' or user_input == 'yes':
-                    user_details['dev'] = True
-                elif user_input == 'n' or user_input == 'no':
-                    user_details['dev'] = False
+        user_details['dev'] = input_y_or_n("Is the new user a developer(yes/no)?")
 
     user_details['password'] = constants.DEFAULT_PASSWORD
 

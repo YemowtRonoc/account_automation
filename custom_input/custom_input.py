@@ -49,3 +49,22 @@ def input_string(prompt):
             print "Invalid, please enter text"
 
     return result
+
+def input_y_or_n(prompt):
+    """
+    Get yes or no from user
+    """
+    result = None
+    while result is None:
+        print prompt
+        user_input = raw_input()
+        if len(user_input) > 0:
+            user_input = user_input.lower()
+            if user_input == 'y' or user_input == 'yes':
+                result = True
+            elif user_input == 'n' or user_input == 'no':
+                result = False
+            else:
+                print "Invalid, please enter yes(y) or no(n)"
+
+    return result
