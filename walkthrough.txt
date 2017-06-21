@@ -1,4 +1,9 @@
-Prerequisites:    
+Prerequisites:   
+
+    You have to have used ssh to access the repo server as the account that you're going to
+    use from the your local machine at least once, as it will cause issues where it asks about
+    the authenticity of the host at the repo server. The script just tries to add a user instead
+    of inputting yes/no.
     
     SSH Keys:
     To use this program, you need to set up SSH keys with the repo server.
