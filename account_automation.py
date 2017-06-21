@@ -83,7 +83,8 @@ def main():
     Bugzilla (%s)
 ==========================
     """ % (constants.BUGZILLA_URL, )
-    bugzilla_credentials = bugzilla_input.input_admin_bugzilla_credentials(bugzilla_credentials)
+    bugzilla_credentials = bugzilla_input.input_admin_bugzilla_credentials(\
+                                                        bugzilla_credentials)
 
     print """
 ========================
