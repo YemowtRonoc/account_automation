@@ -2,6 +2,22 @@
 Module to control user input
 """
 
+def check_valid_ip(input):
+    """
+    Check's to make sure the input is a valid IPv4 address.
+    """
+    import re
+    result = None
+    ip_regex = \
+    r'''(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}
+            ([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])'''
+    if re.search(ip_regex, input, re.X) is not None:
+        result = True
+    else:
+        result = False
+
+    return result
+
 def input_email(prompt):
     """
     Input that only accepts valid email address
@@ -25,13 +41,10 @@ def input_ip_address(prompt):
     while ip_address is None:
         print prompt
         user_input = raw_input()
-        ip_regex = \
-        r'''(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}
-                ([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])'''
-        if re.search(ip_regex, user_input, re.X) is not None:
+        if (check_valid_ip(user_input) == True):
             ip_address = user_input
         else:
-            print "The IP Address has the wrong format"
+            print "Invalid, please enter a valid IP Address"
 
     return ip_address
 
