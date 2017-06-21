@@ -11,10 +11,6 @@ import gmail_api
 import constants
 
 
-# try:
-#     import argparse
-#     FLAGS = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-# except ImportError:
 FLAGS = None
 
 SCOPES = 'https://mail.google.com/'
@@ -61,6 +57,3 @@ def create_email(user_email, admin_email, user_name):
     message = gmail_api.create_message(admin_email, user_email, \
                                 constants.EMAIL_SUBJECT, email_text)
     gmail_api.send_message(service, admin_email, message)
-
-if __name__ == "__main__":
-    print "This module does not work on it's own...."
