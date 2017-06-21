@@ -29,11 +29,11 @@ def sign_in(driver, admin_credentials):
     elem = driver.find_element_by_name("GoAheadAndLogIn")
     elem.click()
 
-def create_user_in_bugzilla(bugzilla_url, fields_values, admin_credentials):
+def create_user_in_bugzilla(bugzilla_url, user_values, admin_credentials):
     """
     Opens bugzilla in firefox. Signs in and adds new user account.
     url: bugzilla url to add user.
-    fields_values: dictionary with keys as field names, and values as field values.
+    user_values: dictionary with keys as field names, and values as field values.
     """
     created_user = False
 
@@ -47,7 +47,7 @@ def create_user_in_bugzilla(bugzilla_url, fields_values, admin_credentials):
 
     try:
         driver.find_element_by_id('notify_user')
-        fill_elements(driver, fields_values)
+        fill_elements(driver, user_values)
 
         elem = driver.find_element_by_id("add")
         elem.click()
@@ -56,7 +56,7 @@ def create_user_in_bugzilla(bugzilla_url, fields_values, admin_credentials):
         created_user = True
     except NoSuchElementException as exc:
         print exc
-        print "Invalid admin credentials, try again"
+        print "Invalid admin credentials, could not sign in"
 
     url = "%s%s" % (bugzilla_url, (constants.BUGZILLA_LOGOUT_URL_EXTENSION))
     driver.get(url)
