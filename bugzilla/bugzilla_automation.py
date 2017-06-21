@@ -5,7 +5,10 @@ import time
 
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
-import constants
+
+BUGZILLA_LOGOUT_URL_EXTENSION = 'index.cgi?logout=1'
+BUGZILLA_ADD_USER_URL_EXTENSION = 'editusers.cgi?action=add'
+SELENIUM_DELAY = 3.5          #Seconds
 
 def fill_elements(driver, dictionary):
     """
@@ -39,11 +42,11 @@ def create_user_in_bugzilla(bugzilla_url, user_values, admin_credentials):
 
     driver = webdriver.Firefox()
 
-    url = "%s%s" % (bugzilla_url, (constants.BUGZILLA_ADD_USER_URL_EXTENSION))
+    url = "%s%s" % (bugzilla_url, (BUGZILLA_ADD_USER_URL_EXTENSION))
     driver.get(url)
     sign_in(driver, admin_credentials)
 
-    time.sleep(constants.SELENIUM_DELAY)
+    time.sleep(SELENIUM_DELAY)
 
     try:
         driver.find_element_by_id('notify_user')
@@ -52,16 +55,16 @@ def create_user_in_bugzilla(bugzilla_url, user_values, admin_credentials):
         elem = driver.find_element_by_id("add")
         elem.click()
 
-        time.sleep(constants.SELENIUM_DELAY)
+        time.sleep(SELENIUM_DELAY)
         created_user = True
     except NoSuchElementException as exc:
         print exc
         print "Invalid admin credentials, could not sign in"
 
-    url = "%s%s" % (bugzilla_url, (constants.BUGZILLA_LOGOUT_URL_EXTENSION))
+    url = "%s%s" % (bugzilla_url, (BUGZILLA_LOGOUT_URL_EXTENSION))
     driver.get(url)
 
-    time.sleep(constants.SELENIUM_DELAY)
+    time.sleep(SELENIUM_DELAY)
     driver.close()
 
     return created_user

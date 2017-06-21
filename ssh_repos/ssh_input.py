@@ -7,7 +7,10 @@ import os
 
 from custom_input.custom_input import input_ip_address
 from custom_input.custom_input import input_string
-import constants
+
+USER_CREDENTIALS = {'login':'<<employee-name>>@<<company-name>>.com', 'dev':True, \
+                            'name':'<<employee-name>>', 'password':'hello123'}
+SCRIPT_NAME = './ssh_repos/add_user_ssh.sh'
 
 def input_admin_ssh_credentials(ssh_credentials):
     """
@@ -38,7 +41,7 @@ def shell_script(admin_credentials, user_credentials):
     Starts shell script and runs it through to add user to system
     """
     script_str = "bash %s \"%s\" \"%s\" \"%s\" \"%s\" \"%s\"" % \
-            (constants.SCRIPT_NAME, admin_credentials['name'], \
+            (SCRIPT_NAME, admin_credentials['name'], \
             admin_credentials['password'], admin_credentials['ip_address'], \
             user_credentials['name'].lower(), user_credentials['dev'])
 
@@ -55,4 +58,4 @@ def begin_automation(user_credentials):
 if __name__ == "__main__":
     SSH_CREDENTIALS = {}
     SSH_CREDENTIALS = input_admin_ssh_credentials(SSH_CREDENTIALS)
-    shell_script(SSH_CREDENTIALS, constants.USER_CREDENTIALS)
+    shell_script(SSH_CREDENTIALS, USER_CREDENTIALS)

@@ -5,7 +5,6 @@ import getpass
 
 import bugzilla_automation
 from custom_input.custom_input import input_email
-import constants
 
 def input_admin_bugzilla_credentials(admin_credentials):
     """
@@ -24,13 +23,3 @@ def input_admin_bugzilla_credentials(admin_credentials):
                 admin_credentials['Bugzilla_password'] = user_input
 
     return admin_credentials
-
-def begin_automation(user_credentials, admin_credentials):
-    """
-    Begin's automation process
-    """
-    status = False
-    while status is False:
-        admin_credentials = input_admin_bugzilla_credentials(admin_credentials)
-        status = bugzilla_automation.create_user_in_bugzilla( \
-                        constants.BUGZILLA_URL, user_credentials, admin_credentials)

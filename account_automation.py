@@ -5,12 +5,14 @@ import argparse
 
 import bugzilla.bugzilla_input as bugzilla_input
 import bugzilla.bugzilla_automation as bugzilla_automation
-import constants
 import ssh_repos.ssh_input as ssh_input
 from custom_input.custom_input import input_email
 from custom_input.custom_input import input_string
 from custom_input.custom_input import input_y_or_n
 from email_notification.create_email import create_email
+
+DEFAULT_PASSWORD = "Hello123"
+BUGZILLA_URL = 'http://192.168.1.123/bugzilla/'
 
 def input_user_details(user_details):
     """
@@ -25,11 +27,9 @@ def input_user_details(user_details):
     if user_details['dev'] is None:
         user_details['dev'] = input_y_or_n("Is the new user a developer(yes/no)?")
 
-    user_details['password'] = constants.DEFAULT_PASSWORD
+    user_details['password'] = DEFAULT_PASSWORD
 
     return user_details
-
-
 
 def main():
     """
@@ -78,7 +78,7 @@ def main():
 ==========================
     Bugzilla (%s)
 ==========================
-    """ % (constants.BUGZILLA_URL, )
+    """ % (BUGZILLA_URL, )
     bugzilla_credentials = bugzilla_input.input_admin_bugzilla_credentials(\
                                                         bugzilla_credentials)
 
@@ -96,7 +96,7 @@ def main():
     """
 
     user_created = bugzilla_automation.create_user_in_bugzilla(\
-                constants.BUGZILLA_URL, user_details, bugzilla_credentials)
+                BUGZILLA_URL, user_details, bugzilla_credentials)
     if user_created == False:
         print "Failed to create bugzilla account, please try again"
     ssh_input.shell_script(ssh_credentials, user_details)
