@@ -2,10 +2,7 @@
 
 ===Prerequisites=== 
 
-You have to have used ssh to access the repo server as the account that you're going to
-use from the your local machine at least once, as it will cause issues where it asks about
-the authenticity of the host at the repo server. The script just tries to add a user instead
-of inputting yes/no.
+Log in to the repo server before using the automation. This will prevent issues involving ssh authentication, as the script is not written to perform a first time setup of the ssh connection.
   
 ====SSH Keys====
 To use this program, you need to set up SSH keys with the repo server.
@@ -21,11 +18,19 @@ and 127.0.0.1 as a placeholder for the repo server IP.
 There are some constants that you may want to update. Mainly the BUGZILLA_URL and 
 DEFAULT_PASSWORD. This is if you want to change either the url to get to 
 bugzilla, or the default password given to the new hires accounts. BUGZILLA_URL and
-DEFAULT_PASSWORD can be found in account_automation.py. 
+DEFAULT_PASSWORD can be found in account_automation.py.
+
+====Gmail Authentication====
+To setup gmail authentication, follow the steps in the following link
+(Note: The quickstart file can be found in the email_notification subfolder. Ensure it's 
+run while your working directory is the root of the account_automation project.) 
+ [https://developers.google.com/gmail/api/quickstart/python:Contents Gmail Authentication] 
+The client_secret.json should be placed in the root of the project. 
     
 ====Setup Scripts====
 The setup scripts will do most of the setup required before running the
-automation. This installs most the dependencies and updates what is needed.
+automation. However, assuming you follow the order of this wiki, the scripts will perform the final steps.
+This installs most of the dependencies and updates what is needed.
 Each step will: 
  - install expect
  - update firefox
@@ -38,14 +43,6 @@ To run this script, go into the setup folder and enter:
 This assumes that you are using an operating system with apt as the package manager. ''init.sh''
 will run all the other scripts in the folder, but if you only need one of those, you can just use
 the one by itself.
-    
-====Gmail Authentication====
-To setup gmail authentication, follow the steps in the following link
-(Note: The quickstart file can be found in the email_notification subfolder. Ensure it's 
-run while your working directory is the root of the account_automation project.) 
- [https://developers.google.com/gmail/api/quickstart/python:Contents Gmail Authentication] 
-The client_secret.json should be placed in the root of the project.
-
 
 ===Running account_automation===
 
@@ -58,7 +55,7 @@ the necessary details to automate the account creation.
 The details requested are: 
  - the name of the new hire
  - the email of the new hire
- - whether or not the new hire is a developer
+ - whether or not the new user is a developer
  - the bugzilla login of the admin 
  - the bugzilla password of the admin
  - the IP address of the repo server (127.0.0.1)
@@ -66,28 +63,51 @@ The details requested are:
  - the password for the admin of the repo server
 
 ====With Arguments====
-The output from -h shows the following:
- python account_automation.py -h
- usage: account_automation.py [-h] [-n NAME] [-e EMAIL] [-d] [-a ADMINEMAIL]
-                             [-r REPOSERVER] [-u ADMINUSERNAME] [-s]
- This automates creation of bugzilla and repo(git) accounts
- optional arguments:
-   -h, --help            show this help message and exit
-   -n NAME, --name NAME  Name of the new hire
-   -e EMAIL, --email EMAIL
-                         Email of the new hire
-   -d, --dev             If the new user is a developer, add this.
-   -a ADMINEMAIL, --adminemail ADMINEMAIL
-                         Email address for the automator
-   -r REPOSERVER, --reposerver REPOSERVER
-                         Repo Server domain (e.g. ssh fs@<--reposerver>)
-   -u ADMINUSERNAME, --adminusername ADMINUSERNAME
-                         Admin username on repo server
-   -s, --sshpassword     Use password with SSH as keys are not set up
+'''A table with the list of arguments is at the end of this section.'''
 
 An example usage of some of the command line arguments would be as follows:
  python account_automation.py -n "Forename Surname" -e "forename.surname@<<company-name>>.com" -a "admin@<<company_name>>.com" -r "127.0.0.1" -u "root"
 The prompts left after this command would request:
  - If the new hire is a developer
  - Password for the 'admin@<<company-name>>.com' bugzilla account
-Adding a -d would reduce it to just the bugzilla password.
+Adding a -d would reduce it to just the bugzilla password, assuming the new user is a developer.
+
+
+{|border="1" cellpadding="5"
+|+'''Command Line Arguments'''
+!Short
+!Long
+!Function
+|-
+| -a
+| --adminemail
+|Email address for the automator
+|-
+| -d
+| --dev
+|If the new user is a developer, add this.
+|-
+| -e
+| --email
+|Email address of the new hire
+|-
+| -h
+| --help
+|show this help message and exit
+|-
+| -n
+| --name
+|Name of the new hire
+|-
+| -r
+| --reposerver
+|Repo Server domain (e.g. ssh fs@<reposerver>)
+|-
+| -s
+| --sshpassword
+|Use password with SSH as keys are not set up
+|-
+| -u
+| --adminusername
+|Admin username on the repo server
+|}
