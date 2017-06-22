@@ -7,8 +7,8 @@ import subprocess
 from custom_input.custom_input import input_ip_address
 from custom_input.custom_input import input_string
 
-USER_CREDENTIALS = {'login':'<<employee-name>>@<<company-name>>.com', 'dev':True, \
-                            'name':'<<employee-name>>', 'password':'hello123'}
+USER_CREDENTIALS = {'login':'conor.twomey@<<company-name>>.com', 'dev':True, \
+                            'name':'Conor Twomey', 'password':'hello123'}
 SCRIPT_NAME = './ssh_repos/add_user_ssh.sh'
 
 def input_admin_ssh_credentials(ssh_credentials):
