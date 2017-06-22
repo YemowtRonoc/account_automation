@@ -1,54 +1,93 @@
-Prerequisites:   
+==Account Automation==
 
-    You have to have used ssh to access the repo server as the account that you're going to
-    use from the your local machine at least once, as it will cause issues where it asks about
-    the authenticity of the host at the repo server. The script just tries to add a user instead
-    of inputting yes/no.
+===Prerequisites=== 
+
+You have to have used ssh to access the repo server as the account that you're going to
+use from the your local machine at least once, as it will cause issues where it asks about
+the authenticity of the host at the repo server. The script just tries to add a user instead
+of inputting yes/no.
+  
+====SSH Keys====
+To use this program, you need to set up SSH keys with the repo server.
+To do this, go to a terminal, and enter: 
+ ssh-keygen
+This will generate an authentication key for your ssh instance.
+From there, copy the key to the repo server.
+ ssh-copy-id fs@127.0.0.1
+with fs as a placeholder for the repo username (initials for Forename Surname), 
+and 127.0.0.1 as a placeholder for the repo server IP.
     
-    SSH Keys:
-    To use this program, you need to set up SSH keys with the repo server.
-    To do this, go to a terminal, and enter: ssh-keygen
-    This will generate an authentication key for your ssh instance.
-    From there, copy the key to the repo server.
-    "ssh-copy-id fs@127.0.0.1", with fs as a placeholder for the repo username, 
-    and 127.0.0.1 as a placeholder for the repo server IP.
+====Resetting Constants====
+There are some constants that you may want to update. Mainly the BUGZILLA_URL and 
+DEFAULT_PASSWORD. This is if you want to change either the url to get to 
+bugzilla, or the default password given to the new hires accounts. BUGZILLA_URL and
+DEFAULT_PASSWORD can be found in account_automation.py. 
     
-    Resetting Constants:
-    In the constants.py file at the root directory of the project, there are
-    some constants that you may want to update. Mainly the BUGZILLA_URL and 
-    DEFAULT_PASSWORD. This is if you want to change either the url to get to 
-    bugzilla, or the default password given to the new hires accounts.
+====Setup Scripts====
+The setup scripts will do most of the setup required before running the
+automation. This installs most the dependencies and updates what is needed.
+Each step will: 
+ - install expect
+ - update firefox
+ - install pip
+ - install selenium for python
+ - install geckodriver for selenium interaction with firefox
+ - install gmail python api client.
+To run this script, go into the setup folder and enter:
+ sudo bash init.sh apt-get
+This assumes that you are using an operating system with apt as the package manager. ''init.sh''
+will run all the other scripts in the folder, but if you only need one of those, you can just use
+the one by itself.
     
-    Setup Scripts:
-    The setup scripts will do most of the setup required before running the
-    automation. This installs most the dependencies and updates what is needed.
-    Each step is: 
-    - installs expect
-    - updates firefox
-    - install pip
-    - selenium for python
-    - geckodriver for selenium interaction with firefox
-    - gmail python api client.
-    
-    Gmail Authentication:
-    To setup gmail authentication, follow the steps in the following link
-    (Note: The quickstart file can be found in the email_notification subfolder. Ensure it's 
-    run while your working directory is the root of the account_automation project.) 
-    https://developers.google.com/gmail/api/quickstart/python 
-    The client_secret.json should be placed in the root of the project.
+====Gmail Authentication====
+To setup gmail authentication, follow the steps in the following link
+(Note: The quickstart file can be found in the email_notification subfolder. Ensure it's 
+run while your working directory is the root of the account_automation project.) 
+ [https://developers.google.com/gmail/api/quickstart/python:Contents Gmail Authentication] 
+The client_secret.json should be placed in the root of the project.
 
 
-Running the account_automation:
+===Running account_automation===
 
-    To run account_automation, simply go to the parent directory and enter 
-    "python account_automation" in the terminal. This should give you a list of prompts for
-    the necessary details to automate the account creation. 
-    The details requested are: 
-    - the name of the new hire (-n, --name)
-    - the email of the new hire (-e, --email)
-    - whether or not the new hire is a developer (-d, --dev)
-    - the bugzilla login of the admin   (-a --adminemail)
-    - the bugzilla password of the admin
-    - the IP address of the repo server (127.0.0.1) (-r, --reposerver)
-    - the admin username on the repo server (root) (-u, --adminusername)
-    - the password for the admin of the repo server
+====Without Arguments====
+
+To run account_automation, simply go to the root directory and enter 
+ python account_automation.py
+in the terminal. This should give you a list of prompts for
+the necessary details to automate the account creation. 
+The details requested are: 
+ - the name of the new hire
+ - the email of the new hire
+ - whether or not the new hire is a developer
+ - the bugzilla login of the admin 
+ - the bugzilla password of the admin
+ - the IP address of the repo server (127.0.0.1)
+ - the admin username on the repo server (root)
+ - the password for the admin of the repo server
+
+====With Arguments====
+The output from -h shows the following:
+ python account_automation.py -h
+ usage: account_automation.py [-h] [-n NAME] [-e EMAIL] [-d] [-a ADMINEMAIL]
+                             [-r REPOSERVER] [-u ADMINUSERNAME] [-s]
+ This automates creation of bugzilla and repo(git) accounts
+ optional arguments:
+   -h, --help            show this help message and exit
+   -n NAME, --name NAME  Name of the new hire
+   -e EMAIL, --email EMAIL
+                         Email of the new hire
+   -d, --dev             If the new user is a developer, add this.
+   -a ADMINEMAIL, --adminemail ADMINEMAIL
+                         Email address for the automator
+   -r REPOSERVER, --reposerver REPOSERVER
+                         Repo Server domain (e.g. ssh fs@<--reposerver>)
+   -u ADMINUSERNAME, --adminusername ADMINUSERNAME
+                         Admin username on repo server
+   -s, --sshpassword     Use password with SSH as keys are not set up
+
+An example usage of some of the command line arguments would be as follows:
+ python account_automation.py -n "Forename Surname" -e "forename.surname@<<company-name>>.com" -a "admin@<<company_name>>.com" -r "127.0.0.1" -u "root"
+The prompts left after this command would request:
+ - If the new hire is a developer
+ - Password for the 'admin@<<company-name>>.com' bugzilla account
+Adding a -d would reduce it to just the bugzilla password.
