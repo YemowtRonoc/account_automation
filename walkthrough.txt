@@ -10,8 +10,8 @@ To do this, go to a terminal, and enter:
  ssh-keygen
 This will generate an authentication key for your ssh instance.
 From there, copy the key to the repo server.
- ssh-copy-id fs@127.0.0.1
-with fs as a placeholder for the repo username (initials for Forename Surname), 
+ ssh-copy-id username@127.0.0.1
+with username as a placeholder for the repo username, 
 and 127.0.0.1 as a placeholder for the repo server IP.
     
 ===Resetting Constants===
@@ -28,7 +28,7 @@ run while your working directory is the root of the account_automation project.)
 The client_secret.json should be placed in the root of the project. 
     
 ===Setup Scripts===
-The setup scripts will do most of the setup required before running the
+The setup scripts will do most of the work required before running the
 automation. However, assuming you follow the order of this wiki, the scripts will perform the final steps.
 This installs most of the dependencies and updates what is needed.
 Each step will: 
