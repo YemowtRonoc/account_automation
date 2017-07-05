@@ -5,6 +5,7 @@ Module to control user input
 def check_valid_ip(input):
     """
     Check's to make sure the input is a valid IPv4 address.
+    input: str that should be in IPv4 format
     """
     import re
     result = None
@@ -21,6 +22,7 @@ def check_valid_ip(input):
 def input_email(prompt):
     """
     Input that only accepts valid email address
+    prompt: str of prompt for user input for email
     """
     email = None
     while email is None:
@@ -35,6 +37,7 @@ def input_email(prompt):
 def input_ip_address(prompt):
     """
     Only accept valid IPv4 Addresses
+    prompt: str of prompt for user input for ip address
     """
     import re
     ip_address = None
@@ -51,6 +54,7 @@ def input_ip_address(prompt):
 def input_string(prompt):
     """
     Get user inputted string
+    prompt: str of prompt for user input of string
     """
     result = None
     while result is None:
@@ -66,6 +70,7 @@ def input_string(prompt):
 def input_y_or_n(prompt):
     """
     Get yes or no from user
+    prompt: str for user input of yes or no
     """
     result = None
     while result is None:
