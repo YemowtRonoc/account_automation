@@ -14,6 +14,7 @@ SCRIPT_NAME = './ssh_repos/add_user_ssh.sh'
 def input_admin_ssh_credentials(ssh_credentials):
     """
     Retrieve admin credentials as user input
+    ssh_credentials: dict of admin ssh credentials for logging in
     """
     if ssh_credentials['ip_address'] is None:
         ssh_credentials['ip_address'] = input_ip_address( \
@@ -36,13 +37,17 @@ def input_admin_ssh_credentials(ssh_credentials):
 
     return ssh_credentials
 
-def shell_script(admin_credentials, user_credentials):
+def shell_script(ssh_credentials, user_credentials):
     """
     Starts shell script and runs it through to add user to system
+    ssh_credentials: dict used for expect scripts to sign into ssh 
+        and perform necessary tasks
+    user_credentials: dict used for expect scripts to create user
+        accounts on repo server
     """
     script_str = "bash %s \"%s\" \"%s\" \"%s\" \"%s\" \"%s\"" % \
-            (SCRIPT_NAME, admin_credentials['name'], \
-            admin_credentials['password'], admin_credentials['ip_address'], \
+            (SCRIPT_NAME, ssh_credentials['name'], \
+            ssh_credentials['password'], ssh_credentials['ip_address'], \
             user_credentials['name'].lower(), user_credentials['dev'])
 
     subprocess.call(script_str, shell=True)
@@ -50,6 +55,8 @@ def shell_script(admin_credentials, user_credentials):
 def begin_automation(user_credentials):
     """
     Begins automation process for repo server account
+    user_credentials: dict of user details used later for expect scripts
+        of account creation for the repo server
     """
     ssh_credentials = {}
     ssh_credentials = input_admin_ssh_credentials(ssh_credentials)
