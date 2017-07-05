@@ -14,6 +14,10 @@ def fill_elements(driver, dictionary):
     """
     Fill elements on page using dictionary of
     fields and values (as keys and values respectively)
+
+    driver: Selenium web driver, used to fill information.
+    dictionary: list of element with the key as the field html
+        id tag, and the value as the input value to be filled in.
     """
     for key, value in dictionary.items():
         try:
@@ -26,6 +30,9 @@ def fill_elements(driver, dictionary):
 def sign_in(driver, admin_credentials):
     """
     Signs into bugzilla.
+
+    driver: Selenium web driver, used to fill in information.
+    admin_credentials: dict of details required to log in.
     """
     fill_elements(driver, admin_credentials)
 
