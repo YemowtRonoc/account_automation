@@ -95,6 +95,9 @@ def get_credentials():
 def create_email(user_email, admin_email, user_name):
     """
     Create and pass email to mail API
+    user_email: email address of user email is being sent to 
+    admin_email: email address of admin who is automating account creation
+    user_name: name of the user who the email is being sent to 
     """
     from apiclient.discovery import build
     credentials = get_credentials()
