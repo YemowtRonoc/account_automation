@@ -17,6 +17,8 @@ BUGZILLA_URL = 'http://192.168.1.123/bugzilla/'
 def input_user_details(user_details):
     """
     Retrieve user details to create bugzilla account.
+    user_details: dict of user information, potentially complete from 
+        command line arguments.
     """
     if user_details['name'] is None:
         user_details['name'] = input_string("What is the new user's name?")
