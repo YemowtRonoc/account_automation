@@ -2,7 +2,8 @@
 
 ==Prerequisites== 
 
-Log in to the repo server before using the automation. This will prevent issues involving ssh authentication, as the script is not written to perform a first time setup of the ssh connection.
+Log in to the repo server before using the automation. This will prevent issues involving ssh authentication, 
+as the script is not written to perform a first time setup of the ssh connection.
   
 ===SSH Keys===
 To use this program, you need to set up SSH keys with the repo server.
