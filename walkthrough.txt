@@ -25,7 +25,7 @@ DEFAULT_PASSWORD can be found in account_automation.py.
 To setup gmail authentication, follow the steps in the following link
 (Note: The quickstart file can be found in the email_notification subfolder. Ensure it's 
 run while your working directory is the root of the account_automation project.) 
- [https://developers.google.com/gmail/api/quickstart/python:Contents Gmail Authentication] 
+ [https://developers.google.com/gmail/api/quickstart/python Gmail Authentication] 
 The client_secret.json should be placed in the root of the project. 
     
 ===Setup Scripts===
