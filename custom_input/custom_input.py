@@ -39,7 +39,6 @@ def input_ip_address(prompt):
     Only accept valid IPv4 Addresses
     prompt: str of prompt for user input for ip address
     """
-    import re
     ip_address = None
     while ip_address is None:
         print prompt
