@@ -23,7 +23,7 @@ DEFAULT_PASSWORD can be found in account_automation.py.
 To setup gmail authentication, follow the steps in the following link
 (Note: The quickstart file can be found in the email_notification subfolder. Ensure it's 
 run while your working directory is the root of the account_automation project.) 
- [https://developers.google.com/gmail/api/quickstart/python Gmail Authentication] 
+ [Gmail Authentication]
 The client_secret.json should be placed in the root of the project. 
     
 ## Setup Scripts
@@ -84,3 +84,6 @@ Adding a -d would reduce it to just the bugzilla password, assuming the new user
 |-r    |--reposerver    |Repo Server domain (e.g. ssh fs@<reposerver>)  |
 |-s    |--sshpassword   |Use password with SSH as keys are not set up   |
 |-u    |--adminusername |Admin username on the repo server              |
+
+
+[Gmail Authentication]: (https://developers.google.com/gmail/api/quickstart/python) 
