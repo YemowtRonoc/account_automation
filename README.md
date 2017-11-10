@@ -23,7 +23,9 @@ DEFAULT_PASSWORD can be found in account_automation.py.
 To setup gmail authentication, follow the steps in the following link
 (Note: The quickstart file can be found in the email_notification subfolder. Ensure it's 
 run while your working directory is the root of the account_automation project.) 
+
  [Gmail Authentication](https://developers.google.com/gmail/api/quickstart/python) 
+ 
 The client_secret.json should be placed in the root of the project. 
     
 ## Setup Scripts
@@ -62,7 +64,6 @@ The details requested are:
  - the password for the admin of the repo server
 
 ## With Arguments
-'''A table with the list of arguments is at the end of this section.'''
 
 An example usage of some of the command line arguments would be as follows:
  python account_automation.py -n "Forename Surname" -e "forename.surname@<<company-name>>.com" -a "admin@<<company_name>>.com" -r "127.0.0.1" -u "root"
